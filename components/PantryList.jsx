@@ -29,7 +29,7 @@ import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { db } from "@/firebase/firebase";
-import { Backdrop, Fade } from "@mui/material";
+import { Backdrop, CircularProgress, Fade } from "@mui/material";
 import Add from "./Add";
 import Edit from "./Edit";
 
@@ -43,6 +43,7 @@ export default function PantryList() {
   const [editopen, setEditOpen] = useState(false);
   const [filteredRows, setFilteredRows] = useState([]);
   const [editData, setEditData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleEditOpen = (data) => {
@@ -64,6 +65,7 @@ export default function PantryList() {
     }
 
     const fetchItems = async ()=>{
+      setLoading(true);
         try {
             const querySnapshot = await getDocs(collection(db, "pantry-items"));
             let data = []
@@ -77,6 +79,8 @@ export default function PantryList() {
             setFilteredRows(data)
         } catch (error) {
             console.error(error)
+        }finally {
+          setLoading(false); 
         }
     }
 
@@ -183,7 +187,10 @@ export default function PantryList() {
       </Modal>
     </div>
 
-      {rows.length >= 0 && (
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px' }}>
+          <CircularProgress />
+        </Box> ) : ( rows.length >= 0 && (
         <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }} className="bg-feature-bg bg-right bg-no-repeat">
           <Typography
             gutterBottom
@@ -296,7 +303,7 @@ export default function PantryList() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )}
+      ))}
     </Box>
   );
 }
