@@ -17,7 +17,7 @@ const Add = ({closeEvent, fetch}) => {
   const [quantity, setQuantity] = useState(null)
   const [price, setPrice] = useState(null)
   const [category, setCategory] = useState("")
-  const [date, setDate] = useState(dayjs(new Date()));
+  const [date, setDate] = useState(null);
   const [item, setItems] = useState(null)
 
 
@@ -28,7 +28,7 @@ const Add = ({closeEvent, fetch}) => {
             quantity:Number(quantity),
             price: Number(price),
             category:category,
-            date:String(date.toString())
+            date:String(date)
             
         })
         console.log(docRef.id)
@@ -100,12 +100,12 @@ const Add = ({closeEvent, fetch}) => {
           <Grid item xs={12}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
         
-        <DatePicker
-      sx={{ minWidth: "100%" }}
-      onChange={(e) => setDate(e.currentTarget)}
-      value={date}
-      renderInput={(params) => <TextField {...params} sx={{ minWidth: "100%" }} />}
-    />
+          <DatePicker
+          sx={{ minWidth: "100%" }}
+          onChange={(newValue) => setDate(newValue)}
+          value={date}
+          renderInput={(params) => <TextField {...params} sx={{ minWidth: "100%" }} />}
+        />
         
     </LocalizationProvider>
 
