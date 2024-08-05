@@ -191,7 +191,7 @@ export default function PantryList() {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px' }}>
           <CircularProgress />
         </Box> ) : ( rows.length >= 0 && (
-        <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }} className="bg-feature-bg bg-right bg-no-repeat">
+        <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }} className=" bg-white">
           <Typography
             gutterBottom
             variant="h5"
@@ -258,13 +258,14 @@ export default function PantryList() {
                         role="checkbox"
                         tabIndex={-1}
                         key={row.code}
+                        
                       >
-                        <TableCell align="left">{row?.itemsName}</TableCell>
-                        <TableCell align="left">{row?.price}</TableCell>
-                        <TableCell align="left">{row?.quantity}</TableCell>
-                        <TableCell align="left">{row?.category}</TableCell>
-                        <TableCell align="left">{row?.date}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left" className="text-md text-black">{row?.itemsName}</TableCell>
+                        <TableCell align="left" className="text-md text-black">{row?.price}</TableCell>
+                        <TableCell align="left" className="text-md text-black">{row?.quantity}</TableCell>
+                        <TableCell align="left" className="text-md text-black">{row?.category}</TableCell>
+                        <TableCell align="left" className="text-md text-black">{row?.date}</TableCell>
+                        <TableCell align="left" className="text-md">
                           <Stack spacing={2} direction="row">
                             <EditIcon
                               style={{
